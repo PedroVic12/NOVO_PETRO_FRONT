@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Shell Exemplos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Python Shell Exemplos</h2>
+        <div class="text-center mt-4">
+            <button id="helloWorld" class="btn btn-primary mr-2">Python: Olá, Mundo!</button>
+            <button id="pythonVersion" class="btn btn-secondary mr-2">Versão do Python</button>
+            <button id="sumNumbers" class="btn btn-success">Somar 5 + 7</button>
+        </div>
+        <div class="mt-4">
+            <h4>Saída:</h4>
+            <pre id="output"></pre>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- ... (parte inicial do código HTML permanece a mesma) ... -->
+
+    <script>
+        $(document).ready(function () {
+            $('#helloWorld').click(function () {
+                $.get("/hello", function (data) {
+                    $('#output').text(data.message);
+                });
+            });
+
+            $('#pythonVersion').click(function () {
+                $.get("/version", function (data) {
+                    $('#output').text(data.version);
+                });
+            });
+
+            $('#sumNumbers').click(function () {
+                $.get("/cwd", function (data) {
+                    $('#output').text(data.directory);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+
+</body>
+
+</html>
