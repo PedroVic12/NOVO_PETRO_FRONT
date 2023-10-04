@@ -11,50 +11,12 @@
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-
     <py-config>
-        packages = ['pandas']
+        packages = ['pandas', 'requests','matplotlib']
     </py-config>
-
 </head>
 
 <body>
-
-
-
-    <h1>Como ler CSV com pandas</h1>
-
-    <p id='csv'>csv</p>
-
-    <h1>Como plotar nossa aplicação</h1>
-
-    <p id='grafico'></p>
-
-    <py-script>
-
-        print('Ola mundo')
-
-        import pandas as pd
-
-        from pyodide.http import open_url
-
-        url_csv_dataset = open_url('http://127.0.0.1:5000/get_csv/Adendo_A_2_Conjunto_de_Dados_DataSet.csv')
-
-        df = pd.read_csv(url_csv_dataset)
-
-        print(df)
-
-        csv = Element('csv')
-
-        csv.write(df.describe())
-
-
-
-    </py-script>
-    backend/DADOS/Adendo A.2_Conjunto de Dados_DataSet.csv
-
-
-
     <div class="container">
         <div class="row mb-4">
             <div class="col">
@@ -64,7 +26,9 @@
 
         <div class="row mb-4">
             <div class="col">
-                <p id='csv' class="p-3 mb-2 bg-light text-dark">CSV Content Will Be Displayed Here</p>
+                <div id="plot">Dados CSV</div>
+
+                <div id='container'></div>
             </div>
         </div>
 
@@ -80,6 +44,81 @@
             </div>
         </div>
     </div>
+
+    <h1>Demo tutorial</h1>
+    <py-script src='./main.py'> </py-script>
+
+
+    <py-repl output="repltOutput"></py-repl>
+    <div id="repltOutput"></div>
+
+
+    <py-script>
+        msg = 'Ola mundo 2'
+        import pandas as pd
+        import requests
+        import time
+        import io
+
+        URL_CSV = 'http://127.0.0.1:5000/get_csv/Adendo_A_2_Conjunto_de_Dados_DataSet.csv'
+
+        # Faça uma solicitação GET para a URL
+        response = requests.get(URL_CSV)
+        #print(response.status_code)
+
+
+
+        if response.status_code == 200:
+        # Use io.BytesIO para criar um objeto de buffer a partir do conteúdo da resposta
+        buffer = io.BytesIO(response.content)
+
+        # Leia o conteúdo do buffer em um DataFrame pandas
+        df = pd.read_csv(buffer)
+
+        # Exiba as primeiras linhas do DataFrame
+        print(df.head())
+
+        csv = Element('plot')
+        container = Element('container')
+
+        container.write(print(msg))
+        csv.write(df.head())
+
+
+    </py-script>
+
+
+    <py-script>
+        import matplotlib.pyplot as plt
+
+        # Crie um exemplo simples de gráfico de linhas usando Matplotlib
+        x = [1, 2, 3, 4, 5]
+        y = [10, 12, 5, 8, 3]
+
+        fig,ax = plt.subplots()
+
+        plt.plot(x, y)
+        plt.xlabel('Eixo X')
+        plt.ylabel('Eixo Y')
+        plt.title('Exemplo de Gráfico de Linhas')
+        plt.grid(True)
+
+        # Salve a figura como uma imagem e exiba-a em uma div
+        img_path = 'line_chart.png'
+        plt.savefig(img_path)
+
+
+        grafico_plot = Element('grafico')
+
+        grafico_plot.write(plt.show())
+
+
+        plt.show()
+
+        fig
+
+
+    </py-script>
 
 </body>
 

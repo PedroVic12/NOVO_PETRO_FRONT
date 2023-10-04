@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import pandas as pd
 import os
+from flask_cors import CORS
 
 
 
@@ -13,6 +14,7 @@ class Raichu:
         #self.data_analysis.run_analysis()
 
     def setup_routes(self):
+        cors = CORS(self.app, resources={r"/get_csv/*": {"origins": "http://127.0.0.1:5000/get_csv/Adendo_A_2_Conjunto_de_Dados_DataSet.csv"}})
 
         # Métodos da API
         @self.app.route('/raichu', methods=['GET'])

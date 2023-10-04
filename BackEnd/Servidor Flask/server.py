@@ -25,6 +25,7 @@ def index():
     plt.ylabel('Idade')
     plt.savefig('static/idade_plot.png')
 
+
     # Renderize a página HTML com a tabela e o gráfico
     return render_template_string(
         '''
