@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRONT END PETROBRAS UFF</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <py-config>
+        packages = ['pandas']
+    </py-config>
+
+</head>
+
+<body>
+
+
+
+    <h1>Como ler CSV com pandas</h1>
+
+    <p id='csv'>csv</p>
+
+    <h1>Como plotar nossa aplicação</h1>
+
+    <p id='grafico'></p>
+
+    <py-script>
+
+        print('Ola mundo')
+
+        import pandas as pd
+
+        from pyodide.http import open_url
+
+        url_csv_dataset = open_url('http://127.0.0.1:5000/get_csv/Adendo_A_2_Conjunto_de_Dados_DataSet.csv')
+
+        df = pd.read_csv(url_csv_dataset)
+
+        print(df)
+
+        csv = Element('csv')
+
+        csv.write(df.describe())
+
+
+
+    </py-script>
+    backend/DADOS/Adendo A.2_Conjunto de Dados_DataSet.csv
+
+
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1 class="text-primary">Como ler CSV com pandas</h1>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <p id='csv' class="p-3 mb-2 bg-light text-dark">CSV Content Will Be Displayed Here</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <h1 class="text-success">Como plotar nossa aplicação</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p id='grafico' class="p-3 mb-2 bg-info text-white">Graph Will Be Displayed Here</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

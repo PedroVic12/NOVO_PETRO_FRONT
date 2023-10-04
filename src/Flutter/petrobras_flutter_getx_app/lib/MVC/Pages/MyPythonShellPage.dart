@@ -16,27 +16,6 @@ class _MyPythonShellScreenState extends State<MyPythonShellScreen> {
     _api.initialize();
   }
 
-  void _runHelloWorld() async {
-    var result = await _api.runCodeString('print("Olá, Mundo!")');
-    setState(() {
-      _output = result ?? ''; // Se result for null, use uma string vazia.
-    });
-  }
-
-  void _runPythonVersion() async {
-    var result = await _api.runCodeString('import sys; print(sys.version)');
-    setState(() {
-      _output = result ?? ''; // Se result for null, use uma string vazia.
-    });
-  }
-
-  void _runSumNumbers() async {
-    var result = await _api.runCodeString('print(5 + 7)');
-    setState(() {
-      _output = result ?? ''; // Se result for null, use uma string vazia.
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,15 +27,15 @@ class _MyPythonShellScreenState extends State<MyPythonShellScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              onPressed: _runHelloWorld,
+              onPressed: () {},
               child: Text('Python: Olá, Mundo!'),
             ),
             ElevatedButton(
-              onPressed: _runPythonVersion,
+              onPressed: () {},
               child: Text('Versão do Python'),
             ),
             ElevatedButton(
-              onPressed: _runSumNumbers,
+              onPressed: () {},
               child: Text('Somar 5 + 7'),
             ),
             SizedBox(height: 20),

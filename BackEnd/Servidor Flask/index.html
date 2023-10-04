@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Exemplo Bootstrap e Seaborn</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h2>Data Frame</h2>
+        {{ table_html | safe }}
+        <h2>Gráfico</h2>
+        <img src="/static/idade_plot.png" alt="Gráfico de Idade">
+    </div>
+</body>
+
+</html>

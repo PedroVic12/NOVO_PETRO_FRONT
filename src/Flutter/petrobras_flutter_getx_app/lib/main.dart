@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'MVC/Pages/MyPythonShellPage.dart';
 import 'MVC/Pages/PythonScreen.dart';
 import 'api/Api_page.dart';
 
@@ -13,9 +14,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-     // home: PythonApiPage(),
-     //home: MyPythonShellScreen()
-     home: ApiPage(),
+      // home: PythonApiPage(),
+      //home: MyPythonShellScreen()
+      home: PythonApiPage(),
     );
   }
 }
