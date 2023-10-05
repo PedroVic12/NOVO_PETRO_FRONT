@@ -1,20 +1,28 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import pandas as pd
 import os
 from flask_cors import CORS
 
-
+import sys
+from Front_END.PyScript_with_angular.models.AnaliseDadosModel import CharizardAnalysis
+sys.path.insert(0, '/home/pedrov/Documentos/GitHub/NOVO_PETRO_FRONT/BackEnd/NOVO_PETRO_BACK_main')
+from S_Al_Novo_Petro_Pre_Proc_POO import DataAnalysis
+ 
 
 class Raichu:
     def __init__(self):
         self.app = Flask(__name__)
         self.setup_routes()
-
-        #self.data_analysis = DataAnalysis()
-        #self.data_analysis.run_analysis()
+        self.data_analysis = CharizardAnalysis()
 
     def setup_routes(self):
         cors = CORS(self.app, resources={r"/get_csv/*": {"origins": "http://127.0.0.1:5000/get_csv/Adendo_A_2_Conjunto_de_Dados_DataSet.csv"}})
+
+
+
+        @self.app.route('/')
+        def index():
+            return render_template('/home/pedrov/Documentos/GitHub/NOVO_PETRO_FRONT/src/Flutter/PyScript with angular/index.html')
 
         # Métodos da API
         @self.app.route('/raichu', methods=['GET'])
@@ -27,15 +35,16 @@ class Raichu:
             return jsonify(message=f"Raichu received: {data}")
 
 
-        # Métodos Arquivos e leitura de dados
-        def ensure_upload_folder_exists(self):
-            if not os.path.exists(self.app.config['UPLOAD_FOLDER']):
-                os.makedirs(self.app.config['UPLOAD_FOLDER'])
+        @self.app.route('/run_analysis', methods=['GET'])
+        def run_analysis_route():
+            analysis_results = self.data_analysis.run_analysis()
 
-        def allowed_file(self, filename):
-            allowed_extensions = {'csv'}
-            return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+            # Verifique se ocorreu algum erro durante a análise
+            if "error" in analysis_results:
+                return jsonify(error=analysis_results["error"]), 400
 
+            # Retorne os resultados como uma resposta JSON
+            return jsonify(analysis_results), 200
 
 
         #Métodos para ML
@@ -51,35 +60,28 @@ class Raichu:
             try:
                 df_carregado = pd.read_csv(file_path)
                 print(df_carregado)
+
+                # Realize a análise dos dados usando a instância da classe DataAnalysis
+                self.data_analysis.load_data(file_path)
+                self.data_analysis.show_file_info()
+                self.data_analysis.plot_heatmap()
+                self.data_analysis.report_high_low_correlations()
+                self.data_analysis.test_normality()
             except Exception as e:
                 return jsonify(error=f"Error reading CSV file: {str(e)}"), 500
             
             return jsonify(message=f'File {file_path} read successfully', data=df_carregado.to_dict()), 200
 
-        @self.app.route('/enviar_csv', methods=['GET'])
-        def enviar_csv():
-            global df_carregado  # Use a variável global loaded_df
 
-            CAMINHO = 'BackEnd/NOVO_PETRO_BACK_main/DADOS/Adendo A.2_Conjunto de Dados_DataSet.csv'
-
-            # Verifique se loaded_df é None, o que significa que nenhum CSV foi carregado ainda
-            if df_carregado is None:
-                return jsonify(error='No CSV loaded'), 400
-
-            try:
-                # Salve o DataFrame em um arquivo temporário
-                temp_filename = 'temp.csv'
-                df_carregado.to_csv(temp_filename, index=False)
-
-                # Envia o arquivo e depois o deleta
-                #return_value = send_file(temp_filename, as_attachment=True, download_name="downloaded.csv")
-                return_value =  jsonify(df_carregado)
-
-                os.remove(temp_filename)
-
-                return return_value
-            except Exception as e:
-                return jsonify(error=f"Error sending file: {str(e)}"), 500
+        @self.app.route('/data_info', methods=['GET'])
+        def get_data_info():
+            # Aqui você pode extrair informações do self.data_analysis e transformá-las em uma resposta JSON
+            # Exemplo:
+            data_info = {
+                "info": self.data_analysis.get_info(),
+                "description": self.data_analysis.get_description()
+            }
+            return jsonify(data_info)
 
                 
         @self.app.route('/get_csv/<filename>', methods=['GET'])
