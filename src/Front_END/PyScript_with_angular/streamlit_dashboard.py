@@ -14,7 +14,7 @@ class Dashboard:
 
     
     def load_data(self):
-        url = 'https://raw.githubusercontent.com/PedroVic12/NOVO_PETRO_FRONT/main/BackEnd/NOVO_PETRO_BACK_main/DADOS/Adendo%20A.3_Conjunto%20de%20Dados_DataSet.csv'
+        url = r'https://raw.githubusercontent.com/PedroVic12/NOVO_PETRO_FRONT/main/BackEnd/NOVO_PETRO_BACK_main/DADOS/Adendo%20A.3_Conjunto%20de%20Dados_DataSet.csv'
         data = pd.read_csv(url)
         return data
 
