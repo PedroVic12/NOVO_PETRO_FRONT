@@ -1,36 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
-import DashboardView from "../src/app/src/views/dashboard_view"; // Atualize o caminho
+import DashboardView from "./app/src/views/Dashboard/dashboard_view"; // Atualize o caminho
+import ScreenPage from './app/src/views/Screens/ScreenPage';
+import RowWidget from './app/src/widgets/Basics/RowWidget';
+import Cabecalho from './app/src/widgets/components/funcional/Header';
 
 function App() {
   return (
+
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        <header className="App-header" >
+
+        <RowWidget>
+
+            <img src={logo} className="App-logo" alt="logo" />
+            <Cabecalho></Cabecalho>
+
+            <h3>OLA MUNDO</h3>
+          
+          </RowWidget>
+
+        </header>
+
+     
 
 
-        <div>
-          OLA MUNDO
-        </div>
 
 
-        <div>
 
-          <DashboardView />
+     
+    
+        <ScreenPage />
+    
+        <DashboardView />
 
-        </div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
     </div>
   );
 }

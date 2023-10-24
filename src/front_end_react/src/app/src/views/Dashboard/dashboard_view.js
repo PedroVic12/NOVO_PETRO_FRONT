@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DashboardController from "../controllers/dashboard_controller";
+import DashboardController from "../../controllers/dashboard_controller";
 import Spinner from "react-bootstrap/Spinner"; // Importe o componente Spinner do Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
