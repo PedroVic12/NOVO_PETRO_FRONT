@@ -27,11 +27,6 @@ function App() {
      
 
 
-
-
-
-     
-    
         <ScreenPage />
     
         <DashboardView />
