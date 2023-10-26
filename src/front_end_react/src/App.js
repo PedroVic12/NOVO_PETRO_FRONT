@@ -11,27 +11,27 @@ function App() {
 
     <div className="App">
 
-        <header className="App-header" >
+      <header className="App-header" >
 
         <RowWidget>
 
-            <img src={logo} className="App-logo" alt="logo" />
-            <Cabecalho></Cabecalho>
+          <img src={logo} className="App-logo" alt="logo" />
+          <Cabecalho></Cabecalho>
 
-            <h3>OLA MUNDO</h3>
-          
-          </RowWidget>
+          <h3>OLA MUNDO</h3>
 
-        </header>
+        </RowWidget>
 
-     
+      </header>
 
 
-        <ScreenPage />
-    
-        <DashboardView />
 
-    
+
+      <ScreenPage />
+
+      <DashboardView />
+
+
     </div>
   );
 }
