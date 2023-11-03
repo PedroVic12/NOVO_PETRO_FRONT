@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HomePageScreen from '../../views/homepage/HomePage';
+import Button from '@mui/material/Button'
 
 function NavigationController() {
     const [pagina, setPagina] = useState('home');
