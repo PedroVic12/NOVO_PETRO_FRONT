@@ -4,7 +4,7 @@ import '../../../../../src/App.css';
 import DashboardView from "../Dashboard/dashboard_view"; // Atualize o caminho
 import RowWidget from '../../widgets/Basics/RowWidget';
 import { Button } from 'react-bootstrap';
-
+import Card from '../../widgets/components/type/Card'
 
 function HomePageScreen() {
     return (
@@ -24,6 +24,9 @@ function HomePageScreen() {
                 </header>
 
 
+                <Card produto={'Mouse'} valor={49.90}></Card>
+                <Card produto={'Teclado'} valor={199.90} ></Card>
+                <Card produto={'Monitor'} valor={249.90}></Card>
 
 
                 <Button>Botão</Button>
