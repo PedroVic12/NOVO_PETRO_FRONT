@@ -4,7 +4,7 @@ import '../../../../../src/App.css';
 import DashboardView from "../Dashboard/dashboard_view"; // Atualize o caminho
 import RowWidget from '../../widgets/Basics/RowWidget';
 import { Button } from 'react-bootstrap';
-import Card from '../../widgets/components/type/Card'
+import Card from '../../widgets/components/type/Card.tsx'
 
 function HomePageScreen() {
     return (
