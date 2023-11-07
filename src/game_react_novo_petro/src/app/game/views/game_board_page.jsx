@@ -6,7 +6,7 @@ function GameViewBoard() {
             <div>
                 <h1>JOGO REACT </h1>
                 <ContainerVideo></ContainerVideo>
-                <VideoWidget></VideoWidget>
+                <VideoWidget>VIDEO</VideoWidget>
             </div>
         </>
     );

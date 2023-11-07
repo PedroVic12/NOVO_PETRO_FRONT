@@ -1,31 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import '../../framework/js-yugioh-assets/src/styles/main.css'
-import '../../framework/js-yugioh-assets/src/styles/containers_and_frames.css'
-import '../../framework/js-yugioh-assets/src/styles/buttons.css'
+import '../framework/js-yugioh-assets/src/styles/main.css'
+import '../framework/js-yugioh-assets/src/styles/containers_and_frames.css'
+import '../framework/js-yugioh-assets/src/styles/buttons.css'
 
 
 
-import Olho from "../../framework/js-yugioh-assets/src/assets/icons/millenium2.png"
-import Video from "../../framework/js-yugioh-assets/src/assets/video/yugi.mp4"
+import Olho from "../framework/js-yugioh-assets/src/assets/icons/millenium2.png"
+import Video from "../framework/js-yugioh-assets/src/assets/video/yugi.mp4"
 
+import { GameModel, GameView, GameController } from '../framework/js-yugioh-assets/src/scripts/engine';
 
 function ContainerVideo() {
+    const [score, setScore] = useState({ playerScore: 0, computerScore: 0 });
+
+    const gameModel = new GameModel();
+    const gameView = new GameView(gameModel);
+    const gameController = new GameController(gameModel, gameView);
+
+    function initState() {
+        console.log(gameModel)
+        console.log(gameView)
+        console.log(gameController)
+    }
+    useEffect(() => {
+        initState();
+        gameController.initCardGameReact();
+    },); // Isso garante que a inicialização ocorra apenas uma vez
+
+    const handleButtonClick = async () => {
+        await gameController.setCardsField();
+        const newScore = gameController.getUpdatedScore();
+        setScore(newScore);
+    };
+
     return (
         <>
             <div className="bg-video"></div>
             <div className="container">
                 <div className="container__left framed-golden-2">
                     <div className="score_box frame">
-                        <span>Win: 0   |    Lose: 0</span>
+                        <span id='score_points'>Win: {score.playerScore}   |    Lose: {score.computerScore}</span>
                     </div>
                     <div className="menu_avatar">
-                        <img src="" id="card-image" />
+                        <img id="card-image" />
                     </div>
                     <div className="card_details frame">
 
-                        <p id='card-name'>oi</p>
-                        <p id='card-type'>oi</p>
+                        <p id='card-name'>Selecione</p>
+                        <p id='card-type'>uma carta</p>
 
                     </div>
 
@@ -35,6 +58,7 @@ function ContainerVideo() {
                     <div className="card-box__container">
 
                         <div className="card-box framed" id='computer-cards'></div>
+
                         <div className="card-versus" >
                             <div className="versus-top">
                                 <div className="card-infield">
@@ -51,6 +75,7 @@ function ContainerVideo() {
                                 <button onClick={() => console.log('clicked')} id='next-duel' class='rpgui-button' type="submit" value="Submit">End Turn</button>
                             </div>
                         </div>
+
                         <div className="card-box framed" id='player-cards'></div>
                     </div>
                 </div>

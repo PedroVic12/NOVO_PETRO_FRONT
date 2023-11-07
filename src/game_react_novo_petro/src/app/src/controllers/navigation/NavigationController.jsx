@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HomePageScreen from '../../views/homepage/HomePage';
 import { Button } from '@material-ui/core'
-import GameViewBoard from '../../../game/views/game_view';
+import GameViewBoard from '../../../game/views/game_board_page';
 
 function NavigationController() {
     const [pagina, setPagina] = useState('home');
