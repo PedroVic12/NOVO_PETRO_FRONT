@@ -6,6 +6,8 @@ import '../game js/framework/js-yugioh-assets/src/styles/containers_and_frames.c
 import '../game js/framework/js-yugioh-assets/src/styles/buttons.css'
 
 import { GameModel, GameView, GameController } from '../game js/framework/js-yugioh-assets/src/scripts/engine';
+import Video from "../game js/framework/js-yugioh-assets/src/assets/video/yugi.mp4"
+
 
 
 function ContainerRight() {
@@ -15,20 +17,21 @@ function ContainerRight() {
     const gameController = new GameController(gameModel, gameView);
 
     useEffect(() => {
-        try {
-            //gameController.removeAllCardsImage()
 
-        } catch (error) {
-            console.log(error)
-        }
-        gameController.initCardGameReact()
-        gameView.setCardsField()
-    }, []);
+        gameController.initCardGameReact().then(
+            gameView.setCardsField()
+
+        )
+
+    },);
 
 
     return (
         <>
             <div className="container__right">
+                <div className="bg-video">
+                    <video src={Video} className="video" loop autoPlay muted />
+                </div>
                 <div className="card-box__container">
 
 

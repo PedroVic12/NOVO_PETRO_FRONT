@@ -7,7 +7,6 @@ import '../framework/js-yugioh-assets/src/styles/buttons.css'
 
 
 import Olho from "../framework/js-yugioh-assets/src/assets/icons/millenium2.png"
-import Video from "../framework/js-yugioh-assets/src/assets/video/yugi.mp4"
 
 import { GameModel, GameView, GameController } from '../framework/js-yugioh-assets/src/scripts/engine';
 import ContainerLeft from '../../views/container_left';
@@ -122,7 +121,6 @@ function GamePage() {
 
 
                 <ContainerRight>
-                    <VideoWidget></VideoWidget>
                 </ContainerRight>
             </div>
         </>
@@ -131,18 +129,3 @@ function GamePage() {
 
 export { GamePage };
 
-
-const VideoWidget = () => {
-    return (
-        <>
-            <div className="bg-video"></div>
-            <video src={Video} className="video">
-
-                <source src={Video} type='video/mp4' />
-
-            </video>
-        </>
-    );
-}
-
-export { VideoWidget };
