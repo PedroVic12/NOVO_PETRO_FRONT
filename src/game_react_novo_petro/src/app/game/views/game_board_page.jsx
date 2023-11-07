@@ -1,11 +1,11 @@
-import { ContainerVideo, VideoWidget } from "../game js/widgets/ContainerVideo";
+import { GameScreen, VideoWidget, GamePage } from "../game js/widgets/game_screen";
 
 function GameViewBoard() {
     return (
         <>
             <div>
                 <h1>JOGO REACT </h1>
-                <ContainerVideo></ContainerVideo>
+                <GamePage></GamePage>
                 <VideoWidget>VIDEO</VideoWidget>
             </div>
         </>

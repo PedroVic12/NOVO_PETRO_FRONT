@@ -10,8 +10,10 @@ import Olho from "../framework/js-yugioh-assets/src/assets/icons/millenium2.png"
 import Video from "../framework/js-yugioh-assets/src/assets/video/yugi.mp4"
 
 import { GameModel, GameView, GameController } from '../framework/js-yugioh-assets/src/scripts/engine';
+import ContainerLeft from '../../views/container_left';
+import ContainerRight from '../../views/container_right';
 
-function ContainerVideo() {
+function GameScreen() {
     const [score, setScore] = useState({ playerScore: 0, computerScore: 0 });
 
     const gameModel = new GameModel();
@@ -84,7 +86,50 @@ function ContainerVideo() {
     );
 }
 
-export { ContainerVideo };
+
+
+
+export { GameScreen };
+
+
+
+function GamePage() {
+    const [score, setScore] = useState({ playerScore: 0, computerScore: 0 });
+
+
+    const gameModel = new GameModel();
+    const gameView = new GameView(gameModel);
+    const gameController = new GameController(gameModel, gameView);
+
+    function initState() {
+        console.log('teste')
+        console.log(gameModel)
+        console.log(gameView)
+        console.log(gameController)
+    }
+    useEffect(() => {
+        // initState();
+        // gameController.initCardGameReact();
+    }, []); // Isso garante que a inicialização ocorra apenas uma vez
+
+
+    return (
+        <>
+            <div className="container">
+                <ContainerLeft>
+                    oi
+                </ContainerLeft>
+
+
+                <ContainerRight>
+                    <VideoWidget></VideoWidget>
+                </ContainerRight>
+            </div>
+        </>
+    );
+}
+
+export { GamePage };
 
 
 const VideoWidget = () => {
