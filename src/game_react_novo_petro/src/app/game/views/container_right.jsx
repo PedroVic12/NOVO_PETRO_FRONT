@@ -17,13 +17,16 @@ function ContainerRight() {
     const gameController = new GameController(gameModel, gameView);
 
     useEffect(() => {
+        gameController.initCardGameReact(); // Executa a primeira função
+        gameView.setCardsField(); // Executa a segunda função após 3 segundos
 
-        gameController.initCardGameReact().then(
-            gameView.setCardsField()
+        const timeout = setTimeout(() => {
+        }, 3000);
 
-        )
+        return () => clearTimeout(timeout); // Limpa o timeout se o componente for desmontado antes do tempo limite
 
     },);
+
 
 
     return (
